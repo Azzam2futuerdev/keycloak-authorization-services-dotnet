@@ -144,14 +144,14 @@ public class AuthorizationServerClient : IAuthorizationServerClient
         if (scopesValidationMode == ScopesValidationMode.AllOf)
         {
             var resourceScopes = resourceToValidate.Scopes;
-            var allScopesPresent = scopes.TrueForAll(s => resourceScopes.Contains(s));
+            var allScopesPresent = scopes.TrueForAll(resourceScopes.Contains);
 
             return allScopesPresent;
         }
         else if (scopesValidationMode == ScopesValidationMode.AnyOf)
         {
             var resourceScopes = resourceToValidate.Scopes;
-            var anyScopePresent = scopes.Exists(s => resourceScopes.Contains(s));
+            var anyScopePresent = scopes.Exists(resourceScopes.Contains);
 
             return anyScopePresent;
         }
